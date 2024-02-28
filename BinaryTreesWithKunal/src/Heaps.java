@@ -43,7 +43,9 @@ public class Heaps<T extends Comparable<T>> {
             list.set(0,last);
             downheap(0);
             //random
-            //new randmom 
+            //new randmom
+            //new random
+            //new random
         }
 
         return temp;
