@@ -156,11 +156,72 @@ Scanner sc = new Scanner(System.in);
         resutlt=result.get(result.size()-1);
         return resutlt.get(0).val;
     }
+    public boolean isEvenODDTREE(){
+        return isEvenOddTree(this.root);
+    }
+    public boolean isEvenOddTree(TreeNode root) {
+       List<List<Integer>> result = new ArrayList<>();
+       List<Integer> list= new ArrayList<>();
+       helper(root, result,list);
+       for(int i =0;i<result.size();i++){
+           List<Integer> temp = result.get(i);
+           for(int j = 0;j<temp.size()-1;j++){
+               if(i%2==0){
+                 if(!(  temp.get(j)%2!=0&&temp.get(j+1)%2!=0&&(temp.get(j)<temp.get(j+1)))){
+                     return false;
+                 }
+               }
+               else{
+                   if(!(    temp.get(j)%2==0&&temp.get(j+1)%2==0&&(temp.get(j)>temp.get(j+1)))){
+                       return false;
+                   }
+               }
+           }
+       }
+        System.out.println(result);
+    return true;
+    }
 
+    private void helper(TreeNode root, List<List<Integer>> result, List<Integer> list) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while (!queue.isEmpty()){
+            int levelsize=queue.size();
+
+            List<Integer> temp = new ArrayList<>();
+
+            for (int i =0;i<levelsize;i++){
+
+                TreeNode currentNode= queue.poll();
+                if(currentNode.left!=null){
+                    queue.offer(currentNode.left);
+                }
+                if(currentNode.right!=null){
+                    queue.offer(currentNode.right);
+                }
+                temp.add(currentNode.val);
+            }
+            result.add(temp);
+
+        }
+
+    }
+public  void insertiseven(){
+        this.root = new TreeNode(2);
+    root.left=new TreeNode(12);
+    root.right = new TreeNode(8);
+    root.left.left=new TreeNode(5);
+    root.left.right=new TreeNode(9);
+    root.left.left.left=new TreeNode(18);
+    root.left.left.right=new TreeNode(16);
+
+}
     public static void main(String[] args) {
-        TreeNode node = new TreeNode(5);
 
-        System.out.println();
+
+
+
+
 
     }
 }

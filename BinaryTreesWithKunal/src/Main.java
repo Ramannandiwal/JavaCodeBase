@@ -27,7 +27,10 @@ public class Main {
 return list;
     }
     public static void main(String[] args)  {
-        System.out.println(threeSum(new int[]{-1,0,1,2,-1,-4}));
+    BinaryTree tree = new BinaryTree();
+    tree.insertiseven();
+    tree.display();
+        System.out.println(tree.isEvenODDTREE());
 
 
     }
