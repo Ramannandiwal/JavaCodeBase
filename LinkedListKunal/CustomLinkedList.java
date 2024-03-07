@@ -370,20 +370,37 @@ return ;        }
         tail.next=list1!=null?list1:list2;
         return dummyHead.next;
     }
-    public ListNode insertionSortList(ListNode head) {
-        ListNode dummyhead = new ListNode(-100);
-        if(head.next!=null){
-            dummyhead.next=head;
-            head=head.next;
-        }
-
-
-        while (head!=null){
-            ListNode temp = dummyhead.next;
-            while(temp.value<head.value){
-                temp=temp.next;
-            }
-
-        }
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+         int length= 0;
+         ListNode temp = head;
+         while(temp!=null){
+             temp = temp.next;
+             length++;
+         }
+         temp=head;
+         for(int i=1;i<=length;i++){
+             temp=temp.next;
+         }
+         temp.next=temp.next.next;
+         return head;
+    }
+    public ListNode mergeInBetween(ListNode list1, int a, int b, ListNode list2) {
+     ListNode first = list1;
+     for(int i =0;i<a-1;i++){
+         first=first.next;
+     }
+     ListNode second =first;
+     for(int i =a;i<=b;i++){
+         second=second.next;
+     }
+     ListNode end = second.next;
+     second.next=null;
+     ListNode temp = list2;
+     while (temp.next!=null){
+         temp=temp.next;
+     }
+ first.next=list2;
+     temp.next=end;
+     return list1;
     }
 }

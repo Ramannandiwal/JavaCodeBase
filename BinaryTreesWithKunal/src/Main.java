@@ -26,6 +26,14 @@ public class Main {
         }
 return list;
     }
+    public int[] sortedSquares(int[] nums) {
+          Arrays.sort(nums);
+          int a[]= new int[nums.length];
+          for(int i =0;i<nums.length;i++){
+              a[i]=(int) Math.pow(nums[i],2);
+          }
+          return a;
+    }
     public static void main(String[] args)  {
     BinaryTree tree = new BinaryTree();
     tree.insertiseven();
