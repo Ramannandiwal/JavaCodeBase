@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Main {
     public static int totalNQueens(int n) {
@@ -63,17 +65,89 @@ public class Main {
           return list;
 
     }
+    public String customSortString(String order, String s) {
+           String result = "";
+        Queue<Character> queue = new LinkedList<>();
+
+        for(int i =0;i<order.length();i++){
+            queue.add(order.charAt(i));
+        }
+       while (!queue.isEmpty()){
+           char c = queue.poll();
+           if(s.contains(c+"")){
+               result= result+c;
+           }
+
+       }
+       for(int i =0;i<s.length();i++){
+           if(!result.contains(s.charAt(i)+"")){
+               result=s.charAt(i)+result;
+           }
+       }
+        return result;
+    }
+    public static int pivotInteger(int n) {
+
+int totalsum = (n*(n+1))/2;
+for(int i =1;i<=n;i++){
+    int sum = helpersum(i);
+    int t_s=totalsum-sum+i;
+    if(t_s==sum){
+        return i;
+
+    }
+}
+     return -1;
+    }
+    private static int helpersum(int x){
+        int sum  =0;
+        for(int i =1;i<=x;i++){
+            sum+=i;
+        }
+        return sum;
+    }
+    public int[] productExceptSelf(int[] nums) {
+        int product = 1;
+        int zeors=0;
+        for(int i :nums){
+            if(i==0){
+                zeors++;
+                if(zeors>1){
+                    return new int[nums.length];
+                }else{
+                    product*=i;
+                }
+            }
+
+        }
+        for(int i =0;i<nums.length;i++){
+                if(zeors==1){
+                    nums[i]=nums[i]==0 ? product:0;
+                }
+                else{
+                    nums[i]=product/nums[i];
+                }
+        }
+        return nums;
+    }
+    public static String reverseWords(String s) {
+s = s.trim();
+ArrayList<String> list = new ArrayList<>(Arrays.asList(s.split(" ")));
+ StringBuilder result = new StringBuilder();
+ for(int i =list.size()-1;i>=0;i--){
+     if(!list.get(i).equals(" ") && !(list.get(i).isEmpty())){
+         result.append(list.get(i));
+         result.append(" ");
+     }
+
+ }
+     return result.toString().trim();
+
+    }
     public static void main(String[] args) {
 
+        System.out.println(reverseWords("a good   example"));
 
-        int arr[][]={
-                {1,3},
-                {2,6},
-                {8,10},
-                {15,18}
-
-        };
-        System.out.println(merge(arr));
 
     }
 
