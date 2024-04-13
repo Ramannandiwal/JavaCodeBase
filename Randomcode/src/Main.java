@@ -146,7 +146,7 @@ ArrayList<String> list = new ArrayList<>(Arrays.asList(s.split(" ")));
     }
     public static void main(String[] args) {
 
-        System.out.println(reverseWords("a good   example"));
+
 
 
     }
