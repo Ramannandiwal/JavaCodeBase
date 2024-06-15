@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/BinaryTreesWithKunal/BinaryTreesWithKunal.iml" filepath="$PROJECT_DIR$/BinaryTreesWithKunal/BinaryTreesWithKunal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DynamicPrograming/DynamicPrograming.iml" filepath="$PROJECT_DIR$/DynamicPrograming/DynamicPrograming.iml" />
       <module fileurl="file://$PROJECT_DIR$/GraphsShardha/GraphsShardha.iml" filepath="$PROJECT_DIR$/GraphsShardha/GraphsShardha.iml" />
       <module fileurl="file://$PROJECT_DIR$/Greddy/Greddy.iml" filepath="$PROJECT_DIR$/Greddy/Greddy.iml" />
       <module fileurl="file://$PROJECT_DIR$/HashMap/HashMap.iml" filepath="$PROJECT_DIR$/HashMap/HashMap.iml" />

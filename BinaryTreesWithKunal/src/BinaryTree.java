@@ -216,11 +216,102 @@ public  void insertiseven(){
     root.left.left.right=new TreeNode(16);
 
 }
+    public int sumOfLeftLeaves(TreeNode root) {
+      return sumOfLeftLeaves(root,false);
+    }
+
+    private int sumOfLeftLeaves(TreeNode root, boolean b) {
+        if(root==null){
+            return 0;
+        }
+        if(root.left==null&&root.right==null){
+            return  b?root.val:0;
+        }
+        int left = sumOfLeftLeaves(root.left,true);
+        int right = sumOfLeftLeaves(root.right,false);
+        return left+right;
+    }
+    int ans = 0;
+    public int sumNumbers(TreeNode root) {
+        sumNumbers(root,0);
+        return ans;
+    }
+
+    private int sumNumbers(TreeNode root, int temp) {
+        if(root==null){
+            return 0;
+        }
+        if(root.left==null&&root.right==null){
+            temp= temp*10+root.val;
+            ans+=temp;
+           return 0;
+        }
+        int left = sumNumbers(root.left,temp*10+root.val);
+        int right = sumNumbers(root.right,temp*10+root.val);
+
+        return 0;
+    }
+//    public TreeNode addOneRow(TreeNode root, int val, int depth) {
+//
+//    }
+static ArrayList<String> list = new ArrayList<>();
+
+    public static String smallestFromLeaf(TreeNode root) {
+        findString(root, new StringBuilder());
+        Collections.sort(list);
+        if(list.isEmpty()){
+            return "";
+        }
+        return list.getFirst();
+    }
+
+    private static void findString(TreeNode root, StringBuilder sb) {
+        if (root == null) return;
+
+        sb.insert(0, (char) ('a' + root.val)); // assuming nodes are from 0 to 25 (representing 'a' to 'z')
+
+        if (root.left == null && root.right == null) { // leaf node
+            list.add(sb.toString());
+        }
+
+        findString(root.left, sb);
+        findString(root.right, sb);
+
+        sb.deleteCharAt(0); // backtrack
+    }
+
+    boolean result = false;
+    public boolean evaluateTree(TreeNode root) {
+
+      return helper(root);
+    }
+
+    private boolean helper(TreeNode root) {
+        if(root==null){
+            return true ;
+        }
+        boolean left = root.left.val==1;
+        boolean right = root.right.val==1;
+        if(root.val==3){
+            return  left &right;
+        }else{
+            return left||right;
+        }
+    }
+
     public static void main(String[] args) {
+TreeNode root = new TreeNode(0) ;
+root.left=new TreeNode(1);
+root.right=new TreeNode(2);
+root.left.left=new TreeNode(3);
+root.left.right=new TreeNode(4);
+root.right.left=new TreeNode(3);
+root.right.right=new TreeNode(4);
 
 
 
 
+        System.out.println(list);
 
 
     }
