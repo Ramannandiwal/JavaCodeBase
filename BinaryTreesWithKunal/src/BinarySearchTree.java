@@ -431,6 +431,94 @@ public  ArrayList<StringBuilder> sumNumbers(){
         ans = Math.max(ans,pathsum);
         return Math.max(left,right)+root.val;
     }
+    public TreeNode bstToGst(TreeNode root) {
+     return HelperBstToGst(root,0);
+    }
+
+    private TreeNode HelperBstToGst(TreeNode root,int value) {
+        if(root==null){
+            return null;
+        }
+        TreeNode right =HelperBstToGst(root.right,value);
+        root.val+=value;
+
+        TreeNode left=HelperBstToGst(root.left,root.val);
+        root.left=left;
+        root.right=right;
+        return root;
+
+    }
+    int index=0;
+    public TreeNode balanceBST(TreeNode root) {
+        ArrayList<Integer> list = new ArrayList<>();
+        helper(root,list);
+        list.sort((a,b)->a-b);
+return null;
+    }
+    public TreeNode createBinaryTree(int[][] descriptions) {
+     HashMap<Integer,TreeNode> map = new HashMap<>();
+     Set<Integer> childs = new HashSet<>();
+     for(int[] i:descriptions){
+         int parent =i[0];
+         int child=i[1];
+         int left=i[2];
+         if(!map.containsKey(parent)){
+             TreeNode p = new TreeNode(parent);
+             map.put(parent,p);
+         }
+         if(!map.containsKey(child)){
+             TreeNode ch = new TreeNode(child);
+             map.put(child,ch);
+         }
+         if(left==1){
+             map.get(parent).left=map.get(child);
+         }else {
+             map.get(parent).right=map.get(child);
+         }
+         childs.add(child);
+     }
+     for(int[]i:descriptions){
+         int parent = i[0];
+         if(!childs.contains(parent)){
+             return map.get(parent);
+         }
+     }
+     return null;
+
+    }
+    public boolean findPath(TreeNode root, int value, StringBuilder path) {
+        if (root == null) {
+            return false;
+        }
+
+        if (root.val == value) {
+            return true;
+        }
+
+        // Check left subtree
+        if (findPath(root.left, value, path)) {
+            path.append("L");
+            return true;
+        }
+
+        // Check right subtree
+        if (findPath(root.right, value, path)) {
+            path.append("R");
+            return true;
+        }
+
+        return false;
+    }
+
+    public List<TreeNode> delNodes(TreeNode root, int[] to_delete) {
+       
+    }
+    private void helper(TreeNode root, ArrayList<Integer> list) {
+        if(root==null)return;
+        list.add(root.val);
+        helper(root.left,list);
+        helper(root.right,list  );
+    }
 
 }
 

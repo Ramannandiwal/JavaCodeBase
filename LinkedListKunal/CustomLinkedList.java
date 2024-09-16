@@ -1,8 +1,5 @@
-package LinkedListKunal;
-
-import org.w3c.dom.Node;
-
-import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CustomLinkedList {
     private ListNode Head;
@@ -27,7 +24,7 @@ public  void  display(){
     System.out.print("Head-->");
     while (temp!=null){
 
-        System.out.print(temp.value+"-->");
+        System.out.print(temp.val +"-->");
         temp=temp.next;
 
     }
@@ -52,7 +49,7 @@ public  void  display(){
         size++;
     }
     public  int deleteFirst(){
-        int value = Head.value;
+        int value = Head.val;
         Head=Head.next;
         if(Head==null){
             Tail=null;
@@ -67,7 +64,7 @@ public  void  display(){
             return deleteFirst();
         }
         ListNode secondLast = get(size-2);
-        int value = Tail.value;
+        int value = Tail.val;
 
         Tail=secondLast;
         Tail.next=null;
@@ -81,7 +78,7 @@ public  void  display(){
             return deleteLast();
         }
         ListNode temp = get(index-1);
-        int value = temp.next.value;
+        int value = temp.next.val;
         temp.next=temp.next.next;
         return value;
 
@@ -117,19 +114,19 @@ public ListNode get(int index){
         Tail= listNode;
         size++;
     }
-    private  class ListNode {
-        private  int value;
+    public  class ListNode {
+        private  int val;
         private ListNode next;
 
         public ListNode(int value) {
-            this.value = value;
+            this.val = value;
         }
 
 public ListNode(){
 
 }
         public ListNode(int value, ListNode next) {
-            this.value = value;
+            this.val = value;
             this.next = next;
         }
 
@@ -139,7 +136,7 @@ public ListNode(){
     public ListNode deleteDuplicates(ListNode head) {
       ListNode temp = Head;
       while (temp!=null&&temp.next!=null){
-          if(temp.value==temp.next.value){
+          if(temp.val ==temp.next.val){
               temp.next = temp.next.next;
           }
           else{
@@ -267,7 +264,7 @@ public ListNode(){
         if(col<row){
             ListNode first = get(col);
             ListNode second = get(col+1);
-            if(first.value>second.value){
+            if(first.val >second.val){
                 //swap
                 if(first==Head){
                     Head=second;
@@ -356,7 +353,7 @@ return ;        }
         ListNode dummyHead = new ListNode();
         ListNode tail = dummyHead;
         while(list1!=null&&list2!=null){
-            if(list1.value<list2.value){
+            if(list1.val <list2.val){
                 tail.next=list1;
                 list1= list1.next;
                 tail = tail.next;
@@ -403,4 +400,53 @@ return ;        }
      temp.next=end;
      return list1;
     }
+    public ListNode mergeNodes(ListNode head) {
+        ArrayList<Integer> list = new ArrayList<>();
+        ListNode temp= head ;
+        ListNode tm=head.next;
+
+        while(temp!=null){
+            int sum =0;
+          while(temp.next!=null&&tm.next.val !=0){
+              sum+=tm.val;
+              tm =tm.next;
+          }
+          sum+=tm==null?0:tm.val;
+          list.add(sum);
+          temp =tm;
+        }
+        ListNode result = new ListNode();
+        ListNode tem = result;
+        for(int i =0;i<list.size();i++){
+            ListNode r = new ListNode(list.get(i));
+            tem.next=r;
+            tem=tem.next;
+        }
+return result.next;
+    }
+    public ListNode modifiedList(int[] nums, ListNode head) {
+        HashMap<Integer,Integer> map = new HashMap<>();
+
+    for(int i=0;i<nums.length;i++){
+        map.putIfAbsent(nums[i],map.getOrDefault(nums[i],0)+1);
+    }
+    ListNode dummyHead=new ListNode(-1);
+    ListNode r = dummyHead;
+    while (head!=null){
+        int freq= map.get(head.val);
+        if(freq>0){
+            map.put(head.val,map.get(head.val)-1);
+        }else{
+            ListNode tempnode = new ListNode(head.val);
+            r.next=tempnode;
+            r=r.next;
+        }
+        head=head.next;
+    }
+    return dummyHead.next;
+    }
+}
+
+public static void main(String[] args) {
+
 }

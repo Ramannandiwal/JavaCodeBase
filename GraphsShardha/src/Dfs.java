@@ -41,32 +41,21 @@ public class Dfs {
         graph[5].add(new Edge(5, 4, 1));
 
     }
-    public static  void dfs(ArrayList<Edge>graph[]){
-        int curr = 0;
-        boolean vis[]= new boolean[graph.length];
-        for(int i =0;i<graph.length;i++){
-            if(!vis[i]){
-                dfsutil(graph,i,vis);
-            }
-        }
-    }
-    public static void dfsutil(ArrayList<Edge> graph[],int curr,boolean vis[]){
-        System.out.print(curr+" ");
-        vis[curr]=true;
-        for(int i =0;i<graph[curr].size();i++){
-            Edge e = graph[curr].get(i);
-            int next = e.dest;
-            if(!vis[next]){
-                dfsutil(graph,next,vis);
-            }
-        }
+   public  static  void dfs(ArrayList<Edge>[] graph,int current,boolean[] visited){
 
+       System.out.print(current+"---");
+    visited[current]=true;
+    for(int i =0;i<graph[current].size();i++){
+        if(!visited[graph[current].get(i).dest]){
+            dfs(graph,graph[current].get(i).dest,visited);
+        }
     }
+   }
 
     public static void main(String[] args) {
         int V = 7;
         ArrayList<Edge> graph[] = new ArrayList[V];
         createGraph(graph);
-     dfs(graph);
+    dfs(graph,0,new boolean[V]);
     }
 }

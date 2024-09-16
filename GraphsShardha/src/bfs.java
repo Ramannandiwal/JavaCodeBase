@@ -44,51 +44,29 @@ public class bfs {
         graph[5].add(new Edge(5, 4, 1));
 
     }
-    public static void bfsnonconnected(ArrayList<Edge>[] graph){
-        int curr =0;
-        boolean vi[]= new boolean[graph.length];
-        for(int i =0;i<graph.length;i++){
-            if(!vi[i]){
-                bfs(graph,curr,vi);
+
+    public static void bfs(ArrayList<Edge>[] graph ){
+        Queue<Integer> queue = new LinkedList<>();
+        boolean visited[] = new boolean[graph.length];
+        queue.add(0);
+        while (!queue.isEmpty()){
+            int current_Index = queue.remove();
+            if(!visited[current_Index]){
+                System.out.print(current_Index+" --- ");
+                visited[current_Index]=true;
+                for(int i =0;i<graph[current_Index].size();i++){
+                    queue.add(graph[current_Index].get(i).dest);
+                }
             }
         }
     }
-    public static void bfs(ArrayList<Edge> graph[],int curr,boolean vis[]){
-
-
-        Queue<Integer> queue = new LinkedList<>();
-        queue.add(curr);
-        while (!queue.isEmpty()){
-            int a = queue.poll();
-
-
-          if(!vis[a]){
-              System.out.print(a+" ");
-              vis[a]=true;
-              for(int i =0;i<graph[a].size();i++){
-                  Edge e  = graph[a].get(i);
-                  queue.add(e.dest);
-              }
-          }
-
-        }
-
-
-
-
-
-
-
-
-
-        }
-
-
 
     public static void main(String[] args) {
-        int V = 7;
-        ArrayList<Edge> graph[] = new ArrayList[V];
+        int V =7;
+        ArrayList<Edge> graph[]= new ArrayList[V];
         createGraph(graph);
-     bfsnonconnected(graph);
+        bfs(graph);
+
     }
+
 }

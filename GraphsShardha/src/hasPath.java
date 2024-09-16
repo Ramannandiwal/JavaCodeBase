@@ -47,7 +47,7 @@ public class hasPath {
             return true;
         }
 
-        if(vis[src] == true){
+        if( vis[src]){
             return false;
         }
         vis[src] = true;

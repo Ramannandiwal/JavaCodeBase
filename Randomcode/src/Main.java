@@ -632,11 +632,381 @@ ArrayList<String> list = new ArrayList<>(Arrays.asList(s.split(" ")));
     return arr1;
 
     }
+    public int findMaximizedCapital(int k, int w, int[] profits, int[] capital) {
+    int project[][]=new int[profits.length][capital.length];
+    for(int i =0;i<profits.length;i++){
+        project[i][0]=capital[i];
+        project[i][1]=profits[i];
+    }
+    Arrays.sort(project,Comparator.comparing(a ->a[0]));
+    PriorityQueue<Integer>maxheap = new PriorityQueue<>(Collections.reverseOrder());
+    int i =0;
+    while (k-- >0){
+        while (i<profits.length&&project[i][0]<=w){
+            maxheap.offer(project[i][1]);
+            i++;
+        }
+        if(maxheap.isEmpty()){
+            break;
+        }
+        w+=maxheap.poll();
 
+
+    }
+    return w;
+    }
+
+//   static class Pair{
+//        int difficulty;
+//        int profit;
+//        Pair(int difficulty,int profit){
+//            this.profit=profit;
+//            this.difficulty=difficulty;
+//        }
+//    }
+
+//    public static int maxProfitAssignment(int[] difficulty, int[] profit, int[] worker) {
+//       int result =0;
+//
+//    Arrays.sort(worker);
+//    Pair[] pair = new Pair[difficulty.length];
+//    for(int i=0;i<difficulty.length;i++){
+//        pair[i]=new Pair(difficulty[i],profit[i]);
+//    }
+//    Arrays.sort(pair, Comparator.comparingInt(a -> a.difficulty));
+//      int j =0;
+//      int maxProfit =0;
+//      for(int i =0;i<worker.length;i++){
+//          if(j<pair.length&& worker[i]>=pair[j].difficulty){
+//              maxProfit=Math.max(maxProfit,pair[j].profit);
+//              j++;
+//          }
+//          result+=maxProfit;
+//      }
+//
+//
+//        return result;
+//
+//    }
+
+    public int maxSatisfied(int[] customers, int[] grumpy, int minutes) {
+      int unsatisfied =0;
+      for(int i =0;i<minutes;i++){
+          unsatisfied+=customers[i]*grumpy[i];
+      }
+
+      int max =unsatisfied;
+      int i =0;
+      int j =minutes;
+      while(j<customers.length){
+         unsatisfied+=customers[j]*grumpy[j];
+         unsatisfied-=customers[i]*grumpy[i];
+         max=Math.max(unsatisfied,max);
+         i++;
+         j++;
+
+
+      }
+    int total = max;
+      for(int k =0;k<customers.length;k++){
+          total+=customers[k]*(1-grumpy[k]);
+      }
+      return total;
+    }
+//    class  Pair{
+//        int destination;
+//        int price;
+//        Pair(int x, int y ){
+//            this.destination=x;
+//            this.price=y;
+//        }
+//
+//    }
+//    public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+//     int result=0;
+//     Vector<Integer> distance = new Vector<>(n);
+//     for(int i =0;i<n;i++){
+//         distance.add(Integer.MAX_VALUE);
+//     }
+//        HashMap<Integer, ArrayList<Pair>> adj = new HashMap<>();
+//        for (int i = 0; i < n; i++) {
+//            adj.put(i, new ArrayList<>());
+//        }
+//        for (int[] i : flights) {
+//            int source = i[0];
+//            int destination = i[1];
+//            int costprice = i[2];
+//            adj.get(source).add(new Pair(destination, costprice));
+//        }
+//         Queue<Pair> queue = new LinkedList<>();
+//        queue.add(new Pair(src,0));
+//        distance.set(src,0) ;
+//        int step = 0;
+//
+//        while (!queue.isEmpty()&&step<=k){
+//            int N = queue.size()    ;
+//            while (N-->0){
+//                Pair p = queue.poll();
+//                int u =p.destination;
+//                int d = p.price;
+//              for(Pair P :adj.get(u)){
+//                  int v = P.destination;
+//
+//                  int cost = P.price;
+//                  if(distance.get(v)>d+cost){
+//                      distance.set(v,d+cost);
+//                      queue.add(new Pair(v,d+cost));
+//                  }
+//
+//              }
+//            }
+//            step++;
+//
+//        }
+//        return  distance.get(dst)==Integer.MAX_VALUE?-1:distance.get(dst);
+//    }
+    class Pair{
+        int destination;
+        int distance;
+        Pair(int x, int y){
+            this.destination=x;
+            this.distance=y;
+        }
+}
+//    public int minScore(int n, int[][] roads) {
+//       HashMap<Integer,ArrayList<Pair>> adj = new HashMap<>();
+//                for (int i = 0; i < n; i++) {
+//            adj.put(i, new ArrayList<>());
+//        }
+//        for (int[] i : roads) {
+//            int source = i[0];
+//            int destination = i[1];
+//            int distance = i[2];
+//            adj.get(source).add(new Pair(destination, distance));
+//        }
+//        for(int i =0;i<adj.size();i++){
+//
+//        }
+//
+//    }
+public int[] sortJumbled(int[] mapping, int[] nums) {
+ int[]temp = new int[nums.length];
+ for(int i =0;i<nums.length;i++){
+     int sizeofthenumber = (int) (Math. log10(nums[i]) + 1);
+     int originalnumber=nums[i];
+     int result=0;
+     while (sizeofthenumber-->0){
+         int currentnumberdigit=originalnumber%10;
+         int newnubmer=mapping[currentnumberdigit];
+         result+=newnubmer*10;
+     }
+
+ }
+ return new int[]{33};
+}
+
+        public int countSeniors(String[] details) {
+        int result =0;
+        for(String s :details){
+            if(Integer.parseInt(s.substring(12,14))>=60){
+                result++;
+            }
+        }
+        return result;
+        }
+
+    public boolean canBeEqual(int[] target, int[] arr) {
+        Arrays.sort(target);
+        Arrays.sort(arr);
+     return Arrays.equals(target,arr);
+    }
+    public  static int rangeSum(int[] nums, int n, int left, int right) {
+        ArrayList<Integer> list = new ArrayList<>();
+      int prefexSum[]=new int[nums.length];
+      prefexSum[0]=nums[0];
+      for(int i =1;i<nums.length;i++){
+          prefexSum[i]=prefexSum[i-1]+nums[i];
+      }
+      for(int i =0;i<nums.length;i++){
+          for(int j=i;j<nums.length;j++){
+              list.add(i==0?prefexSum[j]:prefexSum[j]-prefexSum[i-1]) ;
+          }
+      }
+      list.sort((a,b)->a-b);
+      long sum =0;
+
+        for(int i =left-1;i<right;i++){
+            sum+=list.get(i);
+        }
+
+       int  result = (int) (sum % 1000000007);
+        return result;
+
+    }
+//    public String kthDistinct(String[] arr, int k) {
+//     HashMap<Character,Integer> map = new HashMap<>();
+//     for(int i =0;i<arr.length;i++){
+//
+//     }
+//    }
+    void dfs(int[][]grid ,int row, int col){
+        if(row<0||col<0||row>=grid.length||col>=grid[0].length||grid[row][col]==0){
+            return;
+        }
+        if(grid[row][col]==-1){
+            return;
+        }
+        if(grid[row][col]==1){
+            grid[row][col]=-1;
+            dfs(grid,row,col+1);
+            dfs(grid, row, col-1);
+            dfs(grid,row+1,col);
+            dfs(grid,row-1,col);
+        }
+    }
+    public  int numberofIsland(int[][]grid){
+        int row = grid.length;
+        int col = grid[0].length;
+        int result=0;
+        for (int i =0;i<row;i++){
+            for(int j =0;j<col;j++){
+                dfs(grid,i,j);
+                result++;
+            }
+        }
+        return result;
+    }
+public int minDays(int[][] grid) {
+  int row = grid.length;
+  int col = grid[0].length;
+  int countofIsland=numberofIsland(grid);
+  if(countofIsland==0 ||countofIsland>1){
+      return 0;
+  }else{
+      for(int i =0;i<row;i++){
+          for(int j =0;j<col;j++){
+              if(grid[i][j]==1){
+                  grid[i][j]=0;
+                  countofIsland = numberofIsland(grid);
+                  if(countofIsland==0 ||countofIsland>1){
+                      return 0;
+                  }
+                   grid[i][j]=1;
+              }
+          }
+      }
+  }
+  return 2;
+}
+List<List<Integer> >resutl = new ArrayList<>();
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<Integer> list = new ArrayList<>();
+        Arrays.sort(candidates);
+        combinationSum(candidates,target,0,list);
+        return resutl;
+    }
+
+    private void combinationSum(int[] candidates, int target, int i, List<Integer> list) {
+        if(target==0){
+            resutl.add(new ArrayList<>(list));
+        }
+            for(int index=i;index<candidates.length;index++){
+                combinationSum(candidates,target-candidates[i],index,list);
+            }
+    }
+    public int strangePrinter(String s) {
+        if(s.length()<=1){
+            return 1;
+        }
+        return solve(0,s.length()-1,s);
+    }
+
+    private int solve(int left, int right, String s) {
+        if(left==right){
+            return 1;
+        }
+        if(left>right){
+            return 0;
+    }
+        int i =left+1;
+        while (i<=right&&s.charAt(i)==s.charAt(left)){
+            i++;
+        }
+        if(i==right+1){
+            return 1;
+        }
+        int simple = 1+solve(i,right,s);
+        int approach=Integer.MAX_VALUE;
+        for(int j =i;j<right;j++){
+            if(s.charAt(j)==s.charAt(left)) {
+                int answer= solve(i,j-i,s)+solve(j,right,s);
+                approach=Math.max(approach,answer);
+            }
+        }
+        return Math.max(approach,simple);
+    }
+
+    public String nearestPalindromic(String n) {
+        int number = Integer.parseInt(n);
+        int front=number;
+        int back=number;
+        while(true){
+            if(Palindrome(front)){
+                break;
+            }
+            front++;
+        }
+        while(true){
+            if(Palindrome(back)){
+                break;
+            }
+            back--;
+        }
+        int diff1=Math.abs(number-front);
+        int diff2=Math.abs(number-back);
+                if(diff1<diff2){
+                    return String.valueOf(front);
+                }else if(diff1>diff2){
+                    return String.valueOf(back);
+                }else{
+                    return String.valueOf(back);
+                }
+    }
+
+    private boolean Palindrome(int n) {
+        int originalNumber = n;
+        int reversedNumber = 0;
+
+        while (n != 0) {
+            int digit = n % 10;
+            reversedNumber = reversedNumber * 10 + digit;
+            n /= 10;
+        }
+
+        return originalNumber == reversedNumber;
+    }
+    public int[] missingRolls(int[] rolls, int mean, int n) {
+    int m = rolls.length;
+    if(m==n){
+        return new int[0];
+    }
+    int sumofnumber = 0;
+    for(int i :rolls){
+        sumofnumber+=i;
+
+    }
+    int total = m+n;
+    int requriedsum = (mean*total)-sumofnumber;
+    return findSumofN(requriedsum,n);
+    }
+public static  int[]findSumofN(int Sum,int n ){
+        int result[]=new int[n];
+
+        return result;
+}
     public static void main(String[] args) {
 
-
-        System.out.println(subarraysDivByK(new int[]{1,2,3,4},5));
+        System.out.println(rangeSum(new int[]{1,2,3,4},5,1,5));
 
 
     }
