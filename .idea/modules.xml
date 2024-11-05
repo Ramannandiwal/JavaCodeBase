@@ -13,6 +13,7 @@
       <module fileurl="file://$PROJECT_DIR$/Randomcode/Randomcode.iml" filepath="$PROJECT_DIR$/Randomcode/Randomcode.iml" />
       <module fileurl="file://$PROJECT_DIR$/ShradhhaArrara/ShradhhaArrara.iml" filepath="$PROJECT_DIR$/ShradhhaArrara/ShradhhaArrara.iml" />
       <module fileurl="file://$PROJECT_DIR$/StackandQueue/StackandQueue.iml" filepath="$PROJECT_DIR$/StackandQueue/StackandQueue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Trie/Trie.iml" filepath="$PROJECT_DIR$/Trie/Trie.iml" />
       <module fileurl="file://$PROJECT_DIR$/BinaryTreesWithKunal/random/random.iml" filepath="$PROJECT_DIR$/BinaryTreesWithKunal/random/random.iml" />
     </modules>
   </component>

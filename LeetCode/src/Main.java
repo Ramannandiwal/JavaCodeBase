@@ -144,6 +144,7 @@ public class Main {
 //
 //        return result;
 //    }
+
     public int numberOfSubarrays(int[] nums, int k) {
         HashMap<Integer, Integer> map = new HashMap<>();
         int result = 0;
@@ -553,7 +554,7 @@ public class Main {
             return;
         }
         visited[src] = true;
-        list.add(src);
+        list.add(Integer.valueOf(src));
         for (int i = 0; i < graph[src].length; i++) {
             if (!visited[graph[src][i]]) {
                 dfsforallPath(graph, result, graph[src][i], dest, list, visited);
@@ -575,7 +576,7 @@ public class Main {
             } else if (nums2[j] > nums1[i]) {
                 i++;
             } else {
-                list.add(nums1[i]);
+                list.add(Integer.valueOf(nums1[i]));
                 i++;
                 j++;
             }
@@ -1148,5 +1149,96 @@ public class Main {
             }
         }
 
+    }
+    public int longestCommonPrefix(int[] arr1, int[] arr2) {
+     int result = 0;
+     for(int i =0;i<arr1.length;i++){
+         for(int j =0;j<arr2.length;j++){
+             String a = Integer.toString(arr1[i]);
+             String b = Integer.toString(arr2[j]);
+             int templength = 0;
+             for(int index = 0;index<Math.min(a.length(),b.length());index++){
+                 if(a.charAt(index)==b.charAt(index)) {
+                     templength++;
+                 }
+                 else {
+                     break;
+                 }
+                 result=Math.max(result,templength);
+             }
+
+         }
+     }
+     return result;
+    }
+    public static int find(int x, Vector<Integer> parent) {
+        if (parent.get(x) != x) {
+            parent.set(x, find(parent.get(x), parent)); // Path compression
+        }
+        return parent.get(x);
+    }
+
+    public static void Union(int x, int y, Vector<Integer> parent, Vector<Integer> rank) {
+        int x_parent = find(x, parent);
+        int y_parent = find(y, parent);
+
+        if (x_parent == y_parent) {
+            return;
+        }
+
+        if (rank.get(x_parent) > rank.get(y_parent)) {
+            parent.set(y_parent, x_parent);
+        } else if (rank.get(x_parent) < rank.get(y_parent)) {
+            parent.set(x_parent, y_parent);
+        } else {
+            parent.set(y_parent, x_parent);
+            rank.set(x_parent, rank.get(x_parent) + 1);
+        }
+    }
+
+    public int makeConnected(int n, int[][] connections) {
+        Vector<Integer> parent = new Vector<>();
+        Vector<Integer> rank = new Vector<>();
+        for(int i=0;i<n;i++){
+            parent.add(i);
+            rank.add(0);
+        }
+        int components = n;
+        for(int a[]:connections){
+            int u = a[0];
+            int v =a[1];
+            if(find(u,parent)==find(v,parent)){
+                continue;
+            }
+            else{
+                Union(u,v,parent,rank);
+            }
+        }
+        return components-1;
+    }
+    public boolean equationsPossible(String[] equations) {
+        Vector<Integer> parent = new Vector<>();
+        for(int i=0;i<26;i++){
+            parent.set(i,i);
+        }
+        Vector<Integer> rank = new Vector<>();
+        for(int i =0;i<26;i++){
+            rank.set(i,0)   ;
+        }
+        for(String s :equations){
+            if(s.charAt(1)=='='){
+                Union(s.charAt(0)-'0',s.charAt(3)-'0',parent,rank);
+            }
+        }
+        for(String s :equations){
+            if(s.charAt(1)=='!'){
+                int x_parent = find(s.charAt(0)-'0',parent);
+                int y_parent = find(s.charAt(3)-'0',parent);
+                if(x_parent==y_parent){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
